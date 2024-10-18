@@ -14,18 +14,20 @@ col1, col2 = st.columns(2)
 door_prices = getBasePrice(df)
 with col1:
     door_type = st.radio("Select Door Type:", ["Standard", "Fully Sealed"], horizontal = True)
-    st.write(f"Selected Door Type: {door_type}")
+    
 with col2:
     door_size = st.selectbox("Select Door Size:", list(door_prices.keys()))
-    st.write(f"Selected Door Size: {door_size}")
+    
 
 price = door_prices[door_size][door_type]
+# st.write(f"Selected Door Type: {door_type}")
+# st.write(f"Selected Door Size: {door_size}")
 #st.write("Base Price:" + price)
 
 st.divider()
 
-st.write("Step 2: Select hinge side")
-hinge_type = st.radio("Select Hinge Type:", ["Left hinge", "Right hinge"], horizontal = True)
+st.write("Step 2: Select Hinge Type")
+hinge_type = st.radio("", ["Left hinge", "Right hinge"], horizontal = True)
 
 st.divider()
 
