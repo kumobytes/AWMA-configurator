@@ -37,7 +37,7 @@ def getBasePrice(df):
 
 def getHWPrice(df, type):
     df = cleanHWPriceData(df)
-    if type == 1: # if standard
+    if type == "Standard": # if standard
         df_filtered = df.drop(df[df["Applicable Door Type"] == "fully sealed"].index)
     else: # if fully sealed
         df_filtered = df.drop(df[df["Applicable Door Type"] == "Standard"].index)

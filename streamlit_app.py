@@ -1,9 +1,10 @@
 import pandas as pd
 import streamlit as st
 
-from data_processing import getBasePrice
+from data_processing import getBasePrice, getHWPrice
 
 df = pd.read_csv("Door_prices.csv")
+df1 = pd.read_csv("Hardware_prices.csv", encoding="latin-1")
 
 st.title("AWMA configurator")
 
@@ -34,17 +35,23 @@ st.write("Step 3: Select hardware required")
 ### need review!! door type can be examined here but we need to adopt csv as input
 if door_type in door_prices[door_size]:
     # Add conditional hardware options based on door type
-    if door_type == "Standard":
-        mortice = st.selectbox("Mortice:", ["Universal Mortice Lock 3772TSC", 
-                                            "Australian Oval Cylinder"])
-        latchPlate = st.selectbox("Latch Plate:",["Standard Erntec Latch",
-                                                  "Striker, Electric, 12-30Vdc, 25kg Pre-Load, Multi-function, No-Lip"])
+    HW_prices = getHWPrice(df1, door_type)
 
+    total_price = 0
 
-    elif door_type == "Fully Sealed":
-        mortice = st.selectbox("Mortice:", ["Universal Mortice Lock 3772TSC", "Australian Oval Cylinder"])
-        latchPlate = st.selectbox("Latch Plate:",["Standard Erntec Latch FS",
-                                                  "Striker, Electric, 12-30Vdc, 25kg Pre-Load, Multi-function, No-Lip"])
+    for category, items in HW_prices.items():
+        # Create a selection box for each category
+        selected_item = st.selectbox(f"Select {category}:", list(items.keys()))
+    
+        # Display the price of the selected item
+        price_str = items[selected_item].strip().replace('$', '').replace(',', '')
+        price = float(price_str)
+        total_price += price
+        #st.write(f"Price for {selected_item}: {price}")
 
-holder = ["Custom Latch Block:", "Exterior Plate/ Handle:", "Interior Plate/ Handle:", "Additional Hardware:"]
+st.divider()
+
+st.write(f"### Total Price: ${total_price:.2f}")
+
+holder = ["Mortice:","Latch Plate:","Custom Latch Block:", "Exterior Plate/ Handle:", "Interior Plate/ Handle:", "Additional Hardware:"]
 
