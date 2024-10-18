@@ -33,6 +33,7 @@ st.divider()
 st.write("Step 3: Select hardware required")
 
 mandatory_flags = {}
+# currently hard-coded because there are no 'mandatory' labels in dataset
 mandatory_categories = ["Mortice Locks ", "Interior handles", "Latch", "Machine Block"]
 
 ### need review!! door type can be examined here but we need to adopt csv as input
@@ -49,7 +50,7 @@ if door_type in door_prices[door_size]:
         if category in mandatory_categories:
             mandatory_flags[category] = selected_item != "Select an option..."
     
-        # Display the price of the selected item
+        # Add the price of the selected item
         if selected_item != "Select an option..." and items[selected_item] is not None:
             price_str = items[selected_item].strip().replace('$', '').replace(',', '')
             price = float(price_str)
@@ -57,14 +58,15 @@ if door_type in door_prices[door_size]:
         #st.write(f"Price for {selected_item}: {price}")
 
 st.divider()
-
+# check flag
 all_mandatory_filled = all(mandatory_flags.values())
 
 total_price = float(total_price)
+# only print total price if all mandatory fields are filled
 if all_mandatory_filled:
     st.write(f"### Total Price: ${total_price:.2f}")
 else:
-    st.write("Please complete all mandatory selections to see the total price.")
+    st.write("### Please complete all mandatory selections to see the total price.")
 
 holder = ["Mortice:","Latch Plate:","Custom Latch Block:", "Exterior Plate/ Handle:", "Interior Plate/ Handle:", "Additional Hardware:"]
 
