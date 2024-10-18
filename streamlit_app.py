@@ -19,10 +19,10 @@ with col2:
     door_size = st.selectbox("Select Door Size:", list(door_prices.keys()))
     
 
-price = door_prices[door_size][door_type]
+doorprice = door_prices[door_size][door_type]
 # st.write(f"Selected Door Type: {door_type}")
 # st.write(f"Selected Door Size: {door_size}")
-#st.write("Base Price:" + price)
+#st.write("Base Price:" + doorprice)
 
 st.divider()
 
@@ -39,20 +39,21 @@ if door_type in door_prices[door_size]:
     # Add conditional hardware options based on door type
     HW_prices = getHWPrice(df1, door_type)
 
-    total_price = 0
+    total_price = float(doorprice.replace('$', '').replace(',', '').strip())
 
     for category, items in HW_prices.items():
         # Create a selection box for each category
         selected_item = st.selectbox(f"Select {category}:", list(items.keys()))
     
         # Display the price of the selected item
-        price_str = items[selected_item].strip().replace('$', '').replace(',', '')
-        price = float(price_str)
-        total_price += price
+        if selected_item != "Select an option..." and items[selected_item] is not None:
+            price_str = items[selected_item].strip().replace('$', '').replace(',', '')
+            price = float(price_str)
+            total_price += price
         #st.write(f"Price for {selected_item}: {price}")
 
 st.divider()
-
+total_price = float(total_price)
 st.write(f"### Total Price: ${total_price:.2f}")
 
 holder = ["Mortice:","Latch Plate:","Custom Latch Block:", "Exterior Plate/ Handle:", "Interior Plate/ Handle:", "Additional Hardware:"]

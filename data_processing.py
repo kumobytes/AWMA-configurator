@@ -52,6 +52,9 @@ def getHWPrice(df, type):
             HW_prices[hardwareType] = {}
 
         HW_prices[hardwareType][desc] = price
+        
+        for hardwareType in HW_prices:
+            HW_prices[hardwareType] = {"Select an option...": None, **HW_prices[hardwareType]}
     
     return HW_prices
 
