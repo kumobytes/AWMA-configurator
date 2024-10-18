@@ -30,6 +30,8 @@ st.divider()
 
 st.write("Step 3: Select hardware required")
 
+
+### need review!! door type can be examined here but we need to adopt csv as input
 if door_type in door_prices[door_size]:
     # Add conditional hardware options based on door type
     if door_type == "Standard":
