@@ -58,9 +58,12 @@ def getHWPrice(df, type):
     
     return HW_prices
 
+'''
+test = getBasePrice(df)
+print("Here's the output of getBasePrice")
+print(test)
 
-#test = getBasePrice(df)
-#print(test)
-
-#test2 = getHWPrice(df1, 1)
-#print(test2)
+test2 = getHWPrice(df1, 1)
+print("Here's the output of getHWPrice")
+print(test2)
+'''
