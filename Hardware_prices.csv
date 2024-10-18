@@ -1,0 +1,17 @@
+HardWareID,ERNTEC PART NO.,Applicable Door Type,Hardware Type,Hardware description,Linked,Supplier, Unit Sell  ,MU, Unit Total Cost , Unit Purchase Cost , ERNTEC Operational Cost (ea) , SetUp Cost ,Comments,Cost checking
+17,3542437,both,Additional Hardware,"Closer, Door, Lockwood 726, Silver, LW726SIL",No,LW726SIL, $993.68 ,1.7, $584.52 , $483.55 , $50.97 , $50.00 ,,ok
+5,TBD,both,Exterior handles,"Exterior Plate, Cylinder & Fixed Lever, Lockwood, Satin Chrome,1809/70SC",No,1809/70SC, $240.72 ,1.7, $141.60 , $134.10 , $7.50 , $-   ,,ok
+6,TBD,both,Exterior handles,"Exterior Plate & Lever, Lockwood, Satin Chrome,1805/70SC",No,1805/70SC, $182.58 ,1.7, $107.40 , $99.90 , $7.50 , $-   ,,ok
+7,3536147,both,Exterior handles,"Exterior Plate, Cylinder & Lever, Lockwood, Satin Chrome,1801/70SC",No,1801/70SC, $182.58 ,1.7, $107.40 , $99.90 , $7.50 , $-   ,,ok
+8,TBD,both,Interior handles,"Interior Plate & Lever, Lockwood, Satin Chrome, 1905/70SC",No,1905/70SC, $193.29 ,1.7, $113.70 , $106.20 , $7.50 , $-   ,,ok
+10,3536146,both,Interior handles,"Interior Plate, Turnknob & Lever, Lockwood, Satin Chrome, 1904/70SC",Yes,1904/70SC, $193.29 ,1.7, $113.70 , $106.20 , $7.50 , $-   ,This is added woth 3700 series,ok
+11,TBD,both,Interior handles,LOCKWOOD 3700 SERIES TURNSNIB ADAPTOR (LOCK/UNLOCK)ÿ?ÿ1,Yes,LOCKWOOD 3700, $29.07 ,1.7, $17.10 , $17.10 ,,,This is added with part 1904/70SC as they parts go together,ok
+12,3540751,both,Latch,"Striker, Electric, 12-30Vdc, 25Kg Pre-Load, Multi-Function, No-Lip, Lockwood",Yes,LWES9000-010," $1,679.41 ",1.7, $987.89 , $505.75 , $420.14 , $62.00 ,Added with electric latch 3540751,ok
+15,TBD,both,Latch,Standard Erntec Latch,Yes,Erntec, $56.10 ,1.7, $33.00 , $8.00 , $-   , $25.00 ,Not sold separately must incude block latch 3540605,ok
+13,3542156,fully sealed,Machine Block,"Block, Electric Latch, Machined, Dwg 853-555",Yes,"Kewder, Part 529078"," $1,627.75 ",1.7, $957.50 , $957.50 , $-   , $-   ,Added with the Electric strike for Fully Seraled only,check costs
+14,3541285,Standard,Machine Block,"Block, Latch, Machined, Dwg 853-541",Yes,"Kewder, Part 529915"," $1,066.75 ",1.7, $627.50 , $627.50 ,,,Added with the Electric strike for Standard Thickness only,check costs
+16,3540605,fully sealed,Machine Block,"Block, Latch, Aluminium 5083 H116, Machined, Dwg 853-471",Yes,"Kewder, Part 529008", $823.65 ,1.7, $484.50 , $484.50 , $-   , $-   ,Not sold separatetly cost for this is added with the standard Latch on fully sealed doort,ok
+1,3540382,both,Mortice Locks ,"Lock, Panic Bar, Lockwood, FLUID Exit Mortice Lock Device, 900mm, LWFE109-0MSIL",No,LWFE109-0MSIL," $2,052.75 ",1.7," $1,207.50 "," $1,147.50 ", $40.00 , $20.00 ,,ok
+2,3540383,both,Mortice Locks ,"Lock, Panic Bar, Lockwood, FLUID Exit Mortice Lock Device, 1200mm,  LWFE112-0MSIL",No,LWFE112-0MSIL," $2,197.25 ",1.7," $1,292.50 "," $1,232.50 ", $40.00 , $20.00 ,,ok
+3,TBD,both,Mortice Locks ,"Universal Mortice Lock, Lockwood, 3772TSC",Yes,3772TSC, $360.86 ,1.7, $212.27 , $164.50 , $22.77 , $25.00 ,This is added with part 570-2SC,check with PX
+4,TBD,both,Mortice Locks ,"C4 570 Australian Oval Cylinder with ""X"" CAM 5KD, Lockwood",Yes,570-2SC, $109.82 ,1.7, $64.60 , $64.60 , $-   , $-   ,This is added with part 3772TSC as they parts go together,ok
