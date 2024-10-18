@@ -7,15 +7,17 @@ def convert_currency(value):
     return float(value.replace('$', '').replace(',', ''))
 
 def cleanBasePriceData(df):
+    df.columns = df.columns.str.strip()
     df = df.drop(["DoorSizeID", "Description",
                   "DateEntered","Height","Width","Thickness"], axis=1)
-    df['amount'] = df[' UnitSell '].apply(convert_currency)
+    df['amount'] = df['UnitSell'].apply(convert_currency)
     return df
 
 def cleanHWPriceData(df):
+    df.columns = df.columns.str.strip()
     df = df.loc[:,["Applicable Door Type", "Hardware Type",
-                  "Hardware description"," Unit Sell  "]]
-    df['amount'] = df[' Unit Sell  '].apply(convert_currency)
+                  "Hardware description","Unit Sell"]]
+    df['amount'] = df['Unit Sell'].apply(convert_currency)
     return df
 
 def getBasePrice(df):
@@ -23,7 +25,7 @@ def getBasePrice(df):
     door_prices = {}
     for index, row in df.iterrows():
         size = row['Size']
-        price = row[' UnitSell ']
+        price = row['UnitSell']
         door_type = row['ThicknessType']
         
         if size not in door_prices:
@@ -33,12 +35,17 @@ def getBasePrice(df):
 
     return door_prices
 
-def getHWPrice(df):
+def getHWPrice(df, type):
     df = cleanHWPriceData(df)
+    if type == 1: # if standard
+        df_filtered = df.drop(df[df["Applicable Door Type"] == "fully sealed"].index)
+    else: # if fully sealed
+        df_filtered = df.drop(df[df["Applicable Door Type"] == "Standard"].index)
+
     HW_prices = {}
-    for index, row in df.iterrows():
+    for index, row in df_filtered.iterrows():
         hardwareType = row['Hardware Type']
-        price = row[' Unit Sell  ']
+        price = row['Unit Sell']
         desc = row['Hardware description']
         
         if hardwareType not in HW_prices:
@@ -49,5 +56,8 @@ def getHWPrice(df):
     return HW_prices
 
 
-test = getBasePrice(df)
-print(test)
+#test = getBasePrice(df)
+#print(test)
+
+#test2 = getHWPrice(df1, 1)
+#print(test2)
