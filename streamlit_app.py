@@ -32,17 +32,19 @@ st.divider()
 
 st.write("Step 3: Select hardware required")
 
+# gonna get ugly please don't puke when you read these:
+
 mandatory_flags = {}
 # currently hard-coded because there are no 'mandatory' labels in dataset
 mandatory_categories = ["Mortice", "Interior Plate/Handle", "Latch Plate", "Custom Latch Block"]
 
-### need review!! door type can be examined here but we need to adopt csv as input
+### need review!!
 if door_type in door_prices[door_size]:
-    # Add conditional hardware options based on door type
+    # Retrieve filtered dataset based on door type
     HW_prices = getHWPrice(df1, door_type)
     total_price = float(doorprice.replace('$', '').replace(',', '').strip())
 
-
+    # Put categories into orders, matching the order in macros
     ordered_categories = [
     "Mortice",
     "Latch Plate",
@@ -57,13 +59,18 @@ if door_type in door_prices[door_size]:
     for category in ordered_categories:
         if category not in HW_prices:
             continue
+        # based on 'Latch Plate', skip displaying CLB when 'standard erntec latch' is selected
         if category == "Custom Latch Block" and not show_custom_latch_block:
             continue
+        # create selection box for each category
         selected_item = st.selectbox(f"Select {category}:", list(HW_prices[category].keys()))
+        # turn off the CLB flag based on the condition
         if category == "Latch Plate" and selected_item == "Standard Erntec Latch":
             show_custom_latch_block = False
+        # update mandatory field flag
         if category in mandatory_categories:
             mandatory_flags[category] = selected_item != "Select an option..."
+        # append price
         if selected_item != "Select an option..." and HW_prices[category][selected_item] is not None:
             price_str = HW_prices[category][selected_item].strip().replace('$', '').replace(',', '')
             price = float(price_str)
@@ -74,7 +81,7 @@ st.divider()
 # check flag
 all_mandatory_filled = all(mandatory_flags.values())
 
-total_price = float(total_price)
+# total_price = float(total_price)
 # only print total price if all mandatory fields are filled
 if all_mandatory_filled:
     st.write(f"### Total Price: ${total_price:.2f}")
