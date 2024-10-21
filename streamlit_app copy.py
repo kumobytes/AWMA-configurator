@@ -34,41 +34,28 @@ st.write("Step 3: Select hardware required")
 
 mandatory_flags = {}
 # currently hard-coded because there are no 'mandatory' labels in dataset
-mandatory_categories = ["Mortice", "Interior Plate/Handle", "Latch Plate", "Custom Latch Block"]
+mandatory_categories = ["Mortice Locks ", "Interior handles", "Latch", "Machine Block"]
 
 ### need review!! door type can be examined here but we need to adopt csv as input
 if door_type in door_prices[door_size]:
     # Add conditional hardware options based on door type
     HW_prices = getHWPrice(df1, door_type)
+
     total_price = float(doorprice.replace('$', '').replace(',', '').strip())
 
+    for category, items in HW_prices.items():
+        # Create a selection box for each category
+        selected_item = st.selectbox(f"Select {category}:", list(items.keys()))
 
-    ordered_categories = [
-    "Mortice",
-    "Latch Plate",
-    "Custom Latch Block",
-    "Exterior Plate/Handle (Optional)",
-    "Interior Plate/Handle",
-    "Additional Hardware (Optional)"
-    ]
-
-    show_custom_latch_block = True
-
-    for category in ordered_categories:
-        if category not in HW_prices:
-            continue
-        if category == "Custom Latch Block" and not show_custom_latch_block:
-            continue
-        selected_item = st.selectbox(f"Select {category}:", list(HW_prices[category].keys()))
-        if category == "Latch Plate" and selected_item == "Standard Erntec Latch":
-            show_custom_latch_block = False
         if category in mandatory_categories:
             mandatory_flags[category] = selected_item != "Select an option..."
-        if selected_item != "Select an option..." and HW_prices[category][selected_item] is not None:
-            price_str = HW_prices[category][selected_item].strip().replace('$', '').replace(',', '')
+    
+        # Add the price of the selected item
+        if selected_item != "Select an option..." and items[selected_item] is not None:
+            price_str = items[selected_item].strip().replace('$', '').replace(',', '')
             price = float(price_str)
             total_price += price
-            #st.write(f"Price for {selected_item}: ${price:.2f}")
+        #st.write(f"Price for {selected_item}: {price}")
 
 st.divider()
 # check flag

@@ -18,6 +18,18 @@ def cleanHWPriceData(df):
     df = df.loc[:,["Applicable Door Type", "Hardware Type",
                   "Hardware description","Unit Sell"]]
     df['amount'] = df['Unit Sell'].apply(convert_currency)
+    
+    rename_mapping = {
+        "Mortice Locks ": "Mortice",
+        "Latch": "Latch Plate",
+        "Machine Block": "Custom Latch Block",
+        "Exterior handles": "Exterior Plate/Handle (Optional)",
+        "Interior handles": "Interior Plate/Handle",
+        "Additional Hardware": "Additional Hardware (Optional)"
+    }
+    
+    # Apply the mapping to the 'Hardware Type' column
+    df['Hardware Type'] = df['Hardware Type'].replace(rename_mapping)
     return df
 
 def getBasePrice(df):
