@@ -1,7 +1,7 @@
 import pandas as pd
 
-df = pd.read_excel('current_SQL_Data.xlsx', sheet_name='SQL_Base')
-df1 = pd.read_excel('current_SQL_Data.xlsx', sheet_name='SQL_HardWare')
+df = pd.read_csv('SQL_Base.csv')
+df1 = pd.read_csv('SQL_HardWare.csv')
 
 def convert_currency(value):
     return float(value.replace('$', '').replace(',', ''))

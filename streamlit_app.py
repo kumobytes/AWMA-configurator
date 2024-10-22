@@ -3,8 +3,8 @@ import streamlit as st
 
 from data_processing import getBasePrice, getHWPrice
 
-df = pd.read_excel('current_SQL_Data.xlsx', sheet_name='SQL_Base')
-df1 = pd.read_excel('current_SQL_Data.xlsx', sheet_name='SQL_HardWare')
+df = pd.read_csv('SQL_Base.csv')
+df1 = pd.read_csv('SQL_HardWare.csv')
 
 st.title("AWMA configurator")
 
