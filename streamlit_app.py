@@ -3,8 +3,8 @@ import streamlit as st
 
 from data_processing import getBasePrice, getHWPrice
 
-df = pd.read_csv("Door_prices.csv")
-df1 = pd.read_csv("Hardware_prices.csv", encoding="latin-1")
+df = pd.read_csv('SQL_Base.csv')
+df1 = pd.read_csv('SQL_HardWare.csv')
 
 st.title("AWMA configurator")
 
@@ -42,7 +42,8 @@ mandatory_categories = ["Mortice", "Interior Plate/Handle", "Latch Plate", "Cust
 if door_type in door_prices[door_size]:
     # Retrieve filtered dataset based on door type
     HW_prices = getHWPrice(df1, door_type)
-    total_price = float(doorprice.replace('$', '').replace(',', '').strip())
+    # total_price = float(doorprice.replace('$', '').replace(',', '').strip())
+    total_price = doorprice
 
     # Put categories into orders, matching the order in macros
     ordered_categories = [
@@ -72,7 +73,8 @@ if door_type in door_prices[door_size]:
             mandatory_flags[category] = selected_item != "Select an option..."
         # append price
         if selected_item != "Select an option..." and HW_prices[category][selected_item] is not None:
-            price_str = HW_prices[category][selected_item].strip().replace('$', '').replace(',', '')
+            # price_str = HW_prices[category][selected_item].strip().replace('$', '').replace(',', '')
+            price_str = HW_prices[category][selected_item]
             price = float(price_str)
             total_price += price
             #st.write(f"Price for {selected_item}: ${price:.2f}")

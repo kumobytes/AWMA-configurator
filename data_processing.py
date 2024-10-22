@@ -1,7 +1,7 @@
 import pandas as pd
 
-df = pd.read_csv("Door_prices.csv")
-df1 = pd.read_csv("Hardware_prices.csv", encoding="latin-1")
+df = pd.read_csv('SQL_Base.csv')
+df1 = pd.read_csv('SQL_HardWare.csv')
 
 def convert_currency(value):
     return float(value.replace('$', '').replace(',', ''))
@@ -10,17 +10,17 @@ def cleanBasePriceData(df):
     df.columns = df.columns.str.strip()
     df = df.drop(["DoorSizeID", "Description",
                   "DateEntered","Height","Width","Thickness"], axis=1)
-    df['amount'] = df['UnitSell'].apply(convert_currency)
+    #df['amount'] = df['UnitSellToAWMA'].apply(convert_currency)
     return df
 
 def cleanHWPriceData(df):
     df.columns = df.columns.str.strip()
-    df = df.loc[:,["Applicable Door Type", "Hardware Type",
-                  "Hardware description","Unit Sell"]]
-    df['amount'] = df['Unit Sell'].apply(convert_currency)
+    df = df.loc[:,["ApplicableDoorType", "HardwareType",
+                  "Description","UnitSell"]]
+    #df['amount'] = df['Unit Sell'].apply(convert_currency)
     
     rename_mapping = {
-        "Mortice Locks ": "Mortice",
+        "Mortice Locks": "Mortice",
         "Latch": "Latch Plate",
         "Machine Block": "Custom Latch Block",
         "Exterior handles": "Exterior Plate/Handle (Optional)",
@@ -29,7 +29,7 @@ def cleanHWPriceData(df):
     }
     
     # Apply the mapping to the 'Hardware Type' column
-    df['Hardware Type'] = df['Hardware Type'].replace(rename_mapping)
+    df['HardwareType'] = df['HardwareType'].replace(rename_mapping)
     return df
 
 def getBasePrice(df):
@@ -37,7 +37,7 @@ def getBasePrice(df):
     door_prices = {}
     for index, row in df.iterrows():
         size = row['Size']
-        price = row['UnitSell']
+        price = row['UnitSellToAWMA']
         door_type = row['ThicknessType']
         
         if size not in door_prices:
@@ -50,15 +50,15 @@ def getBasePrice(df):
 def getHWPrice(df, type):
     df = cleanHWPriceData(df)
     if type == "Standard": # if standard
-        df_filtered = df.drop(df[df["Applicable Door Type"] == "fully sealed"].index)
+        df_filtered = df.drop(df[df["ApplicableDoorType"] == "Fully Sealed"].index)
     else: # if fully sealed
-        df_filtered = df.drop(df[df["Applicable Door Type"] == "Standard"].index)
+        df_filtered = df.drop(df[df["ApplicableDoorType"] == "Standard"].index)
 
     HW_prices = {}
     for index, row in df_filtered.iterrows():
-        hardwareType = row['Hardware Type']
-        price = row['Unit Sell']
-        desc = row['Hardware description']
+        hardwareType = row['HardwareType']
+        price = row['UnitSell']
+        desc = row['Description']
         
         if hardwareType not in HW_prices:
             HW_prices[hardwareType] = {}
